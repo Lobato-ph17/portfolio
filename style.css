@@ -1,12 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500&display=swap');
 
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
 :root{
   --bg: #0f1014;           
   --surface: #171922;      
   --text: #e8e8f0;         
-  --muted: #a4a6b3;        
-  --accent: #8b5cf6;       
+  --muted: #a7a9be;        
+  --accent: #7c5cff;        
   --accent-strong: #7c3aed;
+  --line: rgba(255,255,255,.08);    
+
+  --space-1: .25rem;   /* 4px */
+  --space-2: .5rem;    /* 8px */
+  --space-3: .75rem;   /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-7: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */ 
+
+  --radius-md: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+
+  --shadow-sm: 0 1px 1px rgba(0,0,0,.25);
+  --shadow-md: 0 6px 18px rgba(0,0,0,.35);
+  --shadow-lg: 0 18px 40px rgba(0,0,0,.45);
+
+  --dur: .2s;
+  --ease: cubic-bezier(.2,.7,.2,1);
+
+  --content-max: 1100px;
 }
 
 * {
@@ -16,10 +44,28 @@
 }
 
 body {
-    font-family: 'inter', sans-serif;
-    line-height: 1.6;
-    background-color:#0f0f17 ;
-    color: #f5f5f5;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+h1,h2,h3,h4,h5,h6,p { margin: 0; }
+
+ul[role="list"], ol[role="list"] { list-style: none; margin: 0; padding: 0; }
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .2em; }
+
+:focus-visible {
+  outline: 2px solid var(--muted);
+  outline-offset: 2px;
 }
 
 header {
@@ -53,10 +99,21 @@ section{
     padding: 60px 20px;
     max-width: 1000px;
     margin: auto;
+    padding-block: var(--space-7);
 }
 
-h1, h2, h3 {
-    font-family: 'Montserrat', sans-serif;
+h1 { font-family: Montserrat, Inter, sans-serif; font-weight: 700; letter-spacing: -0.02em;
+     font-size: clamp(2rem, 1.2rem + 3vw, 3.25rem); line-height: 1.15; }
+h2 { font-family: Montserrat, Inter, sans-serif; font-weight: 700; letter-spacing: -0.01em;
+     font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem); line-height: 1.2; }
+h3 { font-family: Montserrat, Inter, sans-serif; font-weight: 700;
+     font-size: clamp(1.25rem, .9rem + 1vw, 1.5rem); line-height: 1.25; }
+
+.lead { font-size: clamp(1rem, .9rem + .6vw, 1.25rem); color: var(--muted); }
+
+.small { font-size: .875rem; color: var(--muted); }
+
+h1, h2, h3, h4{
     color: #a855f7;
     margin-bottom: 20px;
 }
@@ -79,12 +136,19 @@ footer {
 }
 
 .hero{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: var(--bg);
     padding:6rem 0 4rem;
+    gap: 2rem;
+    padding: 4rem 2rem;
 }
 
-.hero__container{
-    width: min(1120px, 92vw);
+.hero_container{
+    width: min(var(--content-max), 92vw);
+    padding-inline: var(--space-4);
+     margin-inline: auto;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -93,6 +157,7 @@ footer {
 }
 
 .hero_content{
+    flex: 1;
     color: var(--text);
 }
 
@@ -109,6 +174,7 @@ footer {
     line-height: 1.1;
     font-weight: 800;
     margin: 0;
+    margin-bottom: var(--space-5);
 }
 
 .hero_title span{
@@ -172,18 +238,6 @@ footer {
     gap: .6rem;
 }
 
-.social{
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    background: var(--surface);
-    border: 1px solid rgba(255,255,255,.06);
-    transition: transform .15s ease, background .15s ease, border-color .15s ease;
-
-}
 
 .social:hover{
     transform: translateY(-2px);
@@ -204,10 +258,12 @@ footer {
 }
 
 .hero_photo{
+    width: 250px;
+    height: 400px;
     width: min(360px, 80vw);
-    height: auto;
     border-radius: 22px;
     display: block;
+    object-fit: cover;
     box-shadow: 0 16px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.04) inset;
 }
 
